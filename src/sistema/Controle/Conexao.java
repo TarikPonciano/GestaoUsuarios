@@ -15,10 +15,10 @@ public class Conexao {
 	private String database;
 	
 	// Objetos usados para consultar e manipular o banco
-	private Connection con = null; // Conexão que será estabelecida
-	private Statement st = null; // Objeto que permite executar comandos SQL
-	private PreparedStatement pst = null; // Objeto que permite executar comandos SQL que usem variáveis do java
-	private ResultSet rs = null; // Objeto que guarda os resultados das consultas (SELECT)
+	protected Connection con = null; // Conexão que será estabelecida
+	protected Statement st = null; // Objeto que permite executar comandos SQL
+	protected PreparedStatement pst = null; // Objeto que permite executar comandos SQL que usem variáveis do java
+	protected ResultSet rs = null; // Objeto que guarda os resultados das consultas (SELECT)
 	
 	public Conexao ( String user, String password, String database) {
 		this.url = "jdbc:mysql://localhost:3306/";
