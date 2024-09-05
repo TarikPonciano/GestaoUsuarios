@@ -1,9 +1,42 @@
 package sistema.Controle;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import sistema.Modelo.Usuario;
+
 public class UsuarioDAO extends Conexao{
 
-	public UsuarioDAO(String user, String password, String database) {
-		super(user, password, database);
+	public UsuarioDAO() {
+		super("root", "Aluno", "sistemarh");
+	}
+	// Criar a função buscarUsuarios
+	// Função que conecta, consulta todos os usuários da tabela usuários, imprime todos na tela e desconecta
+	
+	public List<Usuario> buscarTodosUsuarios() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		conectar();
+		
+		try {
+			// SELECT * FROM usuarios
+			st = con.createStatement();
+			
+			rs = st.executeQuery("SELECT * FROM usuarios");
+			
+			while(rs.next()) {
+				Usuario usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+				
+				usuarios.add(usuario);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		desconectar();
+		return usuarios;
 	}
 
 }

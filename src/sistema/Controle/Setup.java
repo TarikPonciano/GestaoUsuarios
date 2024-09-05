@@ -95,6 +95,9 @@ public class Setup extends Conexao {
 		inicializador.criarBanco();
 		inicializador.criarTabelaUsuario();
 		inicializador.inserirUsuariosIniciais();
+		
+		UsuarioDAO tabelaUsuarios = new UsuarioDAO();
+		tabelaUsuarios.buscarTodosUsuarios();
 
 	}
 
