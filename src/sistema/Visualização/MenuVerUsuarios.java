@@ -24,6 +24,7 @@ public class MenuVerUsuarios extends JFrame {
 	private JPanel contentPane;
 	private JTable tabelaUsuarios;
 	private JButton botaoVoltar;
+	private JButton botaoAtualizarTabela;
 
 	/**
 	 * Launch the application.
@@ -59,6 +60,10 @@ public class MenuVerUsuarios extends JFrame {
 		scrollPaneTabelaUsuarios.setBounds(87, 56, 610, 449);
 		contentPane.add(scrollPaneTabelaUsuarios);
 		
+		
+		UsuarioDAO bancoUsuario = new UsuarioDAO();
+		
+		
 		DefaultTableModel modeloTabelaUsuarios = new DefaultTableModel(
 				new Object[][] {
 				},
@@ -66,7 +71,6 @@ public class MenuVerUsuarios extends JFrame {
 					"ID", "Nome", "Email"
 				}
 			);
-		UsuarioDAO bancoUsuario = new UsuarioDAO();
 		
 		List<Usuario> usuarios = bancoUsuario.buscarTodosUsuarios();
 		
@@ -82,6 +86,8 @@ public class MenuVerUsuarios extends JFrame {
 		tabelaUsuarios = new JTable();
 		tabelaUsuarios.setModel(modeloTabelaUsuarios);
 		
+		tabelaUsuarios.setDefaultEditor(Object.class,null); //Impedir edição de tabela
+		
 		scrollPaneTabelaUsuarios.setViewportView(tabelaUsuarios);
 		
 		botaoVoltar = new JButton("");
@@ -95,5 +101,35 @@ public class MenuVerUsuarios extends JFrame {
 			dispose();
 		});
 		contentPane.add(botaoVoltar);
+		
+		botaoAtualizarTabela = new JButton("Atualizar");
+		botaoAtualizarTabela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Inserção do usuario
+				//Receita receita = new Receita(0, campoIdUsuario.getText(),) 
+				//con.inserirNovaReceita(receita)
+				
+				DefaultTableModel modeloTabelaUsuarios = new DefaultTableModel(
+						new Object[][] {
+						},
+						new String[] {
+							"ID", "Nome", "Email"
+						}
+					);
+				
+				List<Usuario> usuarios = bancoUsuario.buscarTodosUsuarios();
+				
+				for (Usuario u: usuarios) {
+					Object[] informacoes = {u.getId(), u.getNome(), u.getEmail()};
+					
+					modeloTabelaUsuarios.addRow(informacoes);
+					
+				}
+				
+				tabelaUsuarios.setModel(modeloTabelaUsuarios);
+			}
+		});
+		botaoAtualizarTabela.setBounds(341, 527, 89, 23);
+		contentPane.add(botaoAtualizarTabela);
 	}
 }
