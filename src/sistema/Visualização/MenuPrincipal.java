@@ -9,6 +9,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import sistema.Modelo.Usuario;
+import sistema.Modelo.UsuarioLogado;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -22,6 +26,7 @@ public class MenuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Usuario usuarioLogado;
 
 	/**
 	 * Launch the application.
@@ -43,6 +48,8 @@ public class MenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		UsuarioLogado instancia = UsuarioLogado.retornarUsuario();
+		Usuario usuario = instancia.getInformacoesUsuario();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		setTitle("Menu Principal");
@@ -84,5 +91,9 @@ public class MenuPrincipal extends JFrame {
 			dispose();
 		});
 		painelMenuBotoes.add(botaoSair);
+		
+		JLabel labelBemVindo = new JLabel("Bem vindo, "+usuario.getNome());
+		labelBemVindo.setBounds(324, 115, 135, 14);
+		contentPane.add(labelBemVindo);
 	}
 }

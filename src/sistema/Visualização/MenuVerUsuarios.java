@@ -68,14 +68,14 @@ public class MenuVerUsuarios extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
-					"ID", "Nome", "Email"
+					"ID", "Nome", "Email", "Senha"
 				}
 			);
 		
 		List<Usuario> usuarios = bancoUsuario.buscarTodosUsuarios();
 		
 		for (Usuario u: usuarios) {
-			Object[] informacoes = {u.getId(), u.getNome(), u.getEmail()};
+			Object[] informacoes = {u.getId(), u.getNome(), u.getEmail(), u.getSenha()};
 			
 			modeloTabelaUsuarios.addRow(informacoes);
 			

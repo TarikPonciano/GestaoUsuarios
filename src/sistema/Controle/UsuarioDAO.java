@@ -38,5 +38,30 @@ public class UsuarioDAO extends Conexao{
 		desconectar();
 		return usuarios;
 	}
+	
+	public Usuario buscarUsuarioPorEmail(String email) {
+		Usuario usuario = null;
+		conectar();
+		
+		try {
+			pst = con.prepareStatement("SELECT * FROM usuarios WHERE email_usuario = ?");
+			pst.setString(1, email);
+			rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4));
+			}
+			
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		desconectar();
+		return usuario;
+		
+		
+		
+	}
+	
 
 }
